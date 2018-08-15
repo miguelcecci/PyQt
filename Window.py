@@ -11,6 +11,7 @@ class Window(QtGui.QMainWindow):
         self.current_user = current_user
         self.central_widget = QtGui.QStackedWidget()
         self.setCentralWidget(self.central_widget)
+        self.move(100, 100)
         self.menu()
 
     def menu(self):

@@ -18,6 +18,7 @@ class Login(QtGui.QDialog):
         self.buttonLogin = QtGui.QPushButton('Login', self)
         self.buttonLogin.clicked.connect(self.handleLogin)
         self.current = None
+        self.move(100, 100)
         layout = QtGui.QVBoxLayout(self)
         layout.addWidget(self.l1)
         layout.addWidget(self.textName)
@@ -28,9 +29,13 @@ class Login(QtGui.QDialog):
     def handleLogin(self):
         user = str(self.textName.text())
         self.current = user
-        password = users.find_one({'user':user})['pass'].encode('ascii')
-        if (hashlib.sha224(str(self.textPass.text())).hexdigest() == password):
-            self.accept()
+        if users.find_one({'user':user}) != None:
+            password = users.find_one({'user':user})['pass'].encode('ascii')
+            if (hashlib.sha224(str(self.textPass.text())).hexdigest() == password):
+                self.accept()
+            else:
+                QtGui.QMessageBox.warning(
+                    self, 'Erro', 'Usuario ou senha invalidos.')
         else:
             QtGui.QMessageBox.warning(
                 self, 'Erro', 'Usuario ou senha invalidos.')

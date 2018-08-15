@@ -7,4 +7,5 @@ class Listar(QtGui.QMainWindow):
         tabela = Tabela(self)
         self.setCentralWidget(tabela)
         self.resize(556, 500)
+        self.move(100, 100)
 
