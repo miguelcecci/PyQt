@@ -6,6 +6,5 @@ class Listar(QtGui.QMainWindow):
         super(Listar, self).__init__(parent)
         tabela = Tabela(self)
         self.setCentralWidget(tabela)
-        w = tabela.geometry().width()
-        self.resize(w*3.1, 500)
+        self.resize(556, 500)
 

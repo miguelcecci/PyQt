@@ -37,7 +37,7 @@ class Registrar(QtGui.QWidget):
             compras.insert_one(compra)
             self.cpf.clear()
             self.valor.clear()
-            QtGui.QMessageBox.warning(
+            QtGui.QMessageBox.information(
                 self, 'Registrado', 'Registrado com sucesso')
             print(compra)
         else:

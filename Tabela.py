@@ -1,19 +1,25 @@
 from PyQt4 import QtGui, QtCore
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://admin:admin123@localhost:27017/')
+db = client.test_database
+collection = db.compras_collection
+compras = db.compras
 
 class Tabela(QtGui.QTableWidget):
     def __init__(self, parent=None):
         super(Tabela, self).__init__(parent)
-        self.data = [{'user':'asd', 'data':'dasd', 'cpf':'120399', 'valor':'123'}, {'user':'eafsasd', 'data':'dassd', 'cpf':'1320399', 'valor':'12333'}]
-        self.setRowCount(4)
+        self.dados = list(compras.find({}))
+        self.setRowCount(len(self.dados))
         self.setColumnCount(4)
         self.set_data()
         self.resizeColumnsToContents()
         self.resizeRowsToContents()
  
     def set_data(self):
-        horHeaders = ['user', 'data', 'cpf', 'valor']
+        horHeaders = ['operador', 'data', 'cpf', 'valor']
         for n, key in enumerate(horHeaders):
-            for m, values in enumerate(self.data):
+            for m, values in enumerate(self.dados):
                 newitem = QtGui.QTableWidgetItem(values[key])
                 self.setItem(m, n, newitem)
         self.setHorizontalHeaderLabels(horHeaders)
